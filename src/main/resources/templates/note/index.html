@@ -14,34 +14,34 @@
   <h1>개인 노트</h1>
 
   <button type="button"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#newNoteModal"
-  data-bs-shatever="@mdo">
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#newNoteModal"
+          data-bs-shatever="@mdo">
     새 글 쓰기
   </button>
 
   <div
-  class="modal fade"
-  id="newNoteModal"
-  tabindex="-1"
-  aria-labelledby="newNoteModal"
-  aria-hidden="true">
+      class="modal fade"
+      id="newNoteModal"
+      tabindex="-1"
+      aria-labelledby="newNoteModal"
+      aria-hidden="true">
 
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="newNoteModalLabel">새 글 쓰기</h5>
           <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close">
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close">
           </button>
         </div>
         <form
-          th:action="@{/note}"
-        method="post">
+            th:action="@{/note}"
+            method="post">
           <div class="modal-body">
             <div class="mb-3">
               <label for="title" class="col-form-label">제목</label>
@@ -62,6 +62,7 @@
     </div>
   </div>
 
+  <!-- 노트 내용 조회 -->
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
@@ -71,14 +72,21 @@
           <p th:text="${note.content}" style="white-space: pre-wrap;"></p>
           <form th:action="@{/note}" th:method="delete">
 
-            <input type="hidden" name="id" th:value="${note.id}"></input>
+            <input type="hidden" name="id" th:value="${note.id}">
+            <!--  노트 삭제 버튼 -->
+            <button type="submit" class="btn btn-secondary">삭제</button>
+            <!-- 작성일자 표시 -->
+            <span style="margin: 10px 0px;">Posted On
+              <strong th:text="${#temporals.format(note.createdAt, 'yyyy-MM-dd')}"></strong>
+            </span>
           </form>
         </div>
+      </div>
     </div>
+
   </div>
 
+
 </div>
-
-
 </body>
 </html>
